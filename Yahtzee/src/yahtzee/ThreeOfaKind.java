@@ -21,13 +21,13 @@ public class ThreeOfaKind {
         int dados[]=new int[5];
         int info[]=new int[2];
         while(jugada<3 && revisar){
-            while(lanzamiento<5-iguales){
+        while(lanzamiento<5-iguales){
                 dados[lanzamiento]=(int)(Math.random()* 6 + 1);
                 ++lanzamiento;
                 
             }
             if(iguales==0){
-            info=check6(dados);
+            info=check5(dados);
             tiros[jugada]=info[0];
             iguales=tiros[jugada];
             }else if(iguales==2){
@@ -45,40 +45,36 @@ public class ThreeOfaKind {
         
     }
     
-    public int[] check6(int[] dados){
-        int iguales=1;
-        int valor=0;
+    public int[] check5(int[] dados){
+        int iguales=0;
         int info[]=new int[2];
+        int values[]=new int[6];
+        int valor=0;
         
-        if(dados[0]==dados[1] || dados[0]==dados[2] || dados[0]==dados[3] || dados[0]==dados[4]){
-            ++iguales;
-            valor=dados[0];
-        }
-        if((dados[1]==dados[2] || dados[1]==dados[3] || dados[1]==dados[4]) ){
-            if(iguales==1 || valor==dados[1]){
-              ++iguales;
-              valor=dados[1];
-            }
-        }
-        if((dados[2]==dados[3] || dados[2]==dados[4])){
-            if(iguales==1 || valor==dados[2]){
-              ++iguales;
-              valor=dados[2];
+        for(int i=0;i<5;i++){
+            int cant=0;
+            for(int j=0;j<5;++j){
+                if(dados[i]==dados[j]){
+                    ++cant;
+                }
+                values[i]=cant;
             }
             
         }
-        if((dados[3]==dados[4])){
-            if(iguales==1 || valor==dados[3]){
-              ++iguales;
-              valor=dados[3];
+        int mayor=0;
+        for(int i=0;i<6;++i){
+            if(values[i]>mayor){
+                mayor=values[i];
+                valor=dados[i];
             }
-            
         }
-        if(iguales==1){
-           iguales=0;
+        if(mayor>=3){
+            info[0]=3;
+        }else if(mayor==2){
+            info[0]=2;
+        }else{
+            info[0]=0;
         }
-
-        info[0]=iguales;
         info[1]=valor;
         
         return info;
