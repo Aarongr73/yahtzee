@@ -15,27 +15,32 @@ public class ThreeOfaKind {
     ArrayList<Integer> mylist = new ArrayList<Integer>();
     
     public void jugada(){
-        int iguales=0;
+        int iguales=0,jugada=0,lanzamiento=0;
+        boolean revisar=true;
         int tiros[]=new int[3];
         int dados[]=new int[5];
         int info[]=new int[2];
-        for(int i=0;i<3;++i){
-            for(int j=0;j<5-iguales;++j){
-                dados[j]=(int)(Math.random()* 6 + 1);
+        while(jugada<3 && revisar){
+            while(lanzamiento<5-iguales){
+                dados[lanzamiento]=(int)(Math.random()* 6 + 1);
+                ++lanzamiento;
                 
             }
             if(iguales==0){
             info=check6(dados);
-            tiros[i]=info[0];
-            iguales=tiros[i];
+            tiros[jugada]=info[0];
+            iguales=tiros[jugada];
             }else if(iguales==2){
-                tiros[i]=check3(dados,info);
-                iguales=iguales+tiros[i];
+                tiros[jugada]=check3(dados,info);
+                iguales=iguales+tiros[jugada];
             }
-            if(tiros[i]==3){
+            if(tiros[jugada]==3){
                 mylist.add(1);
-                break;
+                revisar=false;
             }
+            ++jugada;
+            if(jugada==3)
+                revisar=false;
         }
         
     }
