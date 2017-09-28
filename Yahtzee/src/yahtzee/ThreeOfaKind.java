@@ -30,7 +30,7 @@ public class ThreeOfaKind {
             iguales=tiros[i];
             }else if(iguales==2){
                 tiros[i]=check3(dados,info);
-                iguales=iguales+info[i];
+                iguales=iguales+tiros[i];
             }
             if(tiros[i]==3){
                 mylist.add(1);
@@ -67,7 +67,10 @@ public class ThreeOfaKind {
               ++iguales;
               valor=dados[3];
             }
-;
+            
+        }
+        if(iguales==1){
+           iguales=0;
         }
 
         info[0]=iguales;
